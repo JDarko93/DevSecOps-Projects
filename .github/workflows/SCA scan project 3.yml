@@ -33,7 +33,6 @@ jobs:
     - name: Run Trivy vulnerability scanner in fs mode
       uses: aquasecurity/trivy-action@master
       with:
-        cache-dir: 'path/to/cache'
         scan-type: 'image'
         scanners: 'vuln'
         image-ref: jdarko/scascan:scatest
