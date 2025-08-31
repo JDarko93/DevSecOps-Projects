@@ -1,6 +1,9 @@
 import sqlite3
 import hashlib
 import xml.etree.ElementTree as ET
+import logging
+import watchtower
+import boto3
 import pickle
 import jwt
 import urllib3
@@ -111,3 +114,14 @@ if __name__ == '__main__':
     # Running the Flask app
     app.run()
     FAKE_API_KEY= "12345-ABCDE-67890-FGHIJ"
+    
+    # Setup CloudWatch logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.addHandler(watchtower.CloudWatchLogHandler(
+    log_group='/devsecops/app',
+    stream_name='app-stream'
+))
+
+# Example usage in your code
+logger.info("DevSecOps pipeline executed successfully.")
